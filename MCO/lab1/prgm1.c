@@ -6,6 +6,7 @@ random number output}*/
 
 
 #include <stdio.h>
+#include <stdlib.h>
 int main()
 {
     int random_number = rand();
