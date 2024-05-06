@@ -19,7 +19,7 @@ int sc_main(int argc, char* argv[]) {
 
     // Simulate and display waveforms
     sc_start(0, SC_NS);
-    sc_trace_file *wf = sc_create_ waveform_trace_file("decoder_waveform.vcd");
+    sc_trace_file *wf = sc_create_waveform_trace_file("traces");
     wf->set_time_unit(1, SC_NS);
     wf->add_signal(sig_en);
     wf->add_signal(sig_sel);
