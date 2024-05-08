@@ -3,3 +3,28 @@ outputting Hello world 10 times and 10,000 times
 respectively.*/
 
 
+#include <stdio.h>
+#include <time.h>
+
+void print(int);
+
+int main()
+{
+    clock_t start_time,end_time;
+    double total_time;
+    start_time=clock();
+    print(1000);
+    end_time=clock();
+    total_time=(double)(end_time-start_time)/CLOCKS_PER_SEC;
+
+    printf("The time required for printing hello world 10 times is %f",total_time);
+    printf("\n");
+
+
+    return 0;
+}
+void print(int num)
+{
+    for(int i=0;i<num;i++)
+        printf("Hello World\n");
+}
