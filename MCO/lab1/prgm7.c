@@ -21,7 +21,7 @@ void populateMatrix(int matrix[ROWS][COLS]) {
 void displayMatrix(int matrix[ROWS][COLS]) {
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {
-            printf("%d ", matrix[i][j]);
+            printf("%d \t ", matrix[i][j]);
         }
         printf("\n");
     }
