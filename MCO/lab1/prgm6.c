@@ -13,12 +13,18 @@ int main()
     clock_t start_time,end_time;
     double total_time;
     start_time=clock();
-    print(1000);
+    print(10000);
+    end_time=clock();
+    total_time=(double)(end_time-start_time)/CLOCKS_PER_SEC;
+
+    printf("The time required for printing hello world 10000 times is %f",total_time);
+    printf("\n");
+    start_time=clock();
+    print(10);
     end_time=clock();
     total_time=(double)(end_time-start_time)/CLOCKS_PER_SEC;
 
     printf("The time required for printing hello world 10 times is %f",total_time);
-    printf("\n");
 
 
     return 0;
