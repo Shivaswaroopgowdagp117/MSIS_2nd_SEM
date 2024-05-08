@@ -8,7 +8,7 @@ your code and observe the result.*/
 int main()
 {
     
-    int sum;
+    int sum=0;
     #pragma omp parallel
     {
         
