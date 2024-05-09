@@ -1,28 +1,17 @@
-#ifndef MONITOR_H
-#define MONITOR_H
-
 #include "systemc.h"
+SC_MODULE(monitor){
 
-SC_MODULE(Monitor) {
-public:
-    sc_in<bool> en;
-    sc_in<sc_uint> sel;
-    sc_in<sc_uint> z;
+sc_in<bool> a1,a2,en;
+sc_in<bool>d1,d2,d3,d4;
 
-    Monitor(sc_module_name name) : sc_module(name) {
-        SC_CTOR(Monitor);
-        SC_THREAD(monitorProcess);
-    }
+void mon()
+{
+cout << "Inputs: en "<<en<<" a2 "<<a2<<" a1 "<<a1  << " Output: "<<d4<<d3<<d2<<d1<<endl; 
+}
 
-private:
-    void monitorProcess() {
-        while (true) {
-            wait();
-            cout << "en: " << en.read() << ", sel: " << sel.read() << ", z: " << z.read() << endl;
-        }
-    }
-
-    SC_HAS_PROCESS(Driver); // Typo corrected: Monitor uses SC_HAS_PROCESS
+	SC_CTOR(monitor)
+	{
+		SC_METHOD(mon);
+		sensitive <<a1 <<a2<<en;
+	}
 };
-
-#endif

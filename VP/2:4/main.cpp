@@ -3,29 +3,27 @@
 #include "driver.h"
 #include "monitor.h"
 
-int sc_main(int argc, char* argv[]) {
-    sc_clock clk("clk", 10, SC_NS);
+int sc_main( int argc, char* argv[] ) {
+sc_signal <bool> a1,a2,en,d1,d2,d3,d4;
 
-    Decoder decoder("decoder");
-    Driver driver("driver", 20);
-    Monitor monitor("monitor");
+decoder decode("decoder");
+driver drive("driver");
+monitor mon("monitor");
 
-    // Create trace signals for visualization
-    sc_trace sig_en("en", driver.en);
-    sc_trace sig_sel("sel", driver.sel);
-    sc_trace sig_z("z", decoder.z);
+decode.a1(a1); decode.a2(a2); decode.en(en); decode.d1(d1);decode.d2(d2);decode.d3(d3);decode.d4(d4);
+drive.a1(a1); drive.a2(a2); drive.en(en); 
+mon.a1(a1);mon.a2(a2); mon.d1(d1);mon.d2(d2);mon.d3(d3);mon.d4(d4);mon.en(en);
 
-    sc_start(100, SC_NS);
-
-    // Simulate and display waveforms
-    sc_start(0, SC_NS);
-    sc_trace_file *wf = sc_create_waveform_trace_file("decoder_waveform.vcd");
-    wf->set_time_unit(1, SC_NS);
-    wf->add_signal(sig_en);
-    wf->add_signal(sig_sel);
-    wf->add_signal(sig_z);
-    sc_trace(sc_end_of_simulation, wf->close_file);
-    sc_stop();
-
-    return 0;
+sc_trace_file *Tf;
+Tf = sc_create_vcd_trace_file("traces");
+sc_trace(Tf, a1, "a1"); 
+sc_trace(Tf, a2, "a2"); 
+sc_trace(Tf, en, "en"); 
+sc_trace(Tf, d1, "d1");
+sc_trace(Tf, d2, "d2");
+sc_trace(Tf, d3, "d3");
+sc_trace(Tf, d4, "d4");
+sc_start(50,SC_NS);
+sc_close_vcd_trace_file(Tf);
+return 0; 
 }
