@@ -1,28 +1,16 @@
-#ifndef MONITOR_H
-#define MONITOR_H
-
 #include "systemc.h"
+SC_MODULE(monitor){
 
-SC_MODULE(Monitor) {
-public:
-    sc_in<bool> en;
-    sc_in<sc_uint> sel;
-    sc_in<sc_uint> z;
+sc_in<bool> a1,b1,c1,d1;
 
-    Monitor(sc_module_name name) : sc_module(name) {
-        SC_CTOR(Monitor);
-        SC_THREAD(monitorProcess);
-    }
+void mon()
+{
+cout << "Inputs: "<<a1 <<b1 <<c1 << " Output: "<<d1 <<endl; 
+}
 
-private:
-    void monitorProcess() {
-        while (true) {
-            wait();
-            cout << "en: " << en.read() << ", sel: " << sel.read() << ", z: " << z.read() << endl;
-        }
-    }
-
-    SC_HAS_PROCESS(Monitor);
+	SC_CTOR(monitor)
+	{
+		SC_METHOD(mon);
+		sensitive <<a1 <<b1 <<c1;
+	}
 };
-
-#endif
