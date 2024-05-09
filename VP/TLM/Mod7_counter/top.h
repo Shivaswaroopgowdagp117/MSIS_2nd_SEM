@@ -7,18 +7,18 @@
 SC_MODULE(Top)
 {
   Initiator *initiator;
-  Memory    *memory;
+  mod7counter  *counter;
 
   SC_CTOR(Top)
   {
     // Instantiate components
     initiator = new Initiator("initiator");
-    memory    = new Memory   ("memory");
+    counter   = new mod7counter("counter");
 
     // One initiator is bound directly to one target with no intervening bus
 
     // Bind initiator socket to target socket
-    initiator->socket.bind( memory->socket );
+    initiator->socket.bind(counter->socket );
   }
 };
 
