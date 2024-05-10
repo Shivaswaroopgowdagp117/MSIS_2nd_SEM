@@ -1,0 +1,17 @@
+#include <systemc.h>
+
+SC_MODULE(monitor)
+{
+	sc_in<bool>clk,rst;
+	
+	sc_in<sc_uint<5>>counter;
+	
+	void mon(){
+	cout<<"clock: "<< clk<<" Rst: "<< rst<<" output: "<< counter<<endl;
+	}
+	SC_CTOR(monitor){
+		SC_METHOD(mon);
+		sensitive<<clk.pos()<<rst;
+	}
+
+};
